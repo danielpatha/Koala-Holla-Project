@@ -1,3 +1,6 @@
+-- The database name should be 'Koala'
+-- Initialized with these given sql commands
+
 DROP TABLE IF EXISTS "koalas";
 CREATE TABLE "koalas" (
 "id" SERIAL PRIMARY KEY,
