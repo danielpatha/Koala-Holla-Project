@@ -37,7 +37,20 @@ function getKoalas(){
     .then((res) => {
       $('#viewKoalas').empty();
       for(const koala of res) {
-        $('#viewKoalas').append(`
+        if(koala.ready) {
+          $('#viewKoalas').append(`
+            <tr>
+              <td>${koala.name}</td>
+              <td>${koala.age}</td>
+              <td>${koala.gender}</td>
+              <td>${koala.ready}</td>
+              <td>${koala.notes}</td>
+              <td><button class="removeBtn" data-id="${koala.id}">REMOVE</button></td>
+            </tr>
+          `);
+        }
+        else {
+          $('#viewKoalas').append(`
           <tr>
             <td>${koala.name}</td>
             <td>${koala.age}</td>
@@ -48,6 +61,7 @@ function getKoalas(){
             <td><button class="readyBtn" data-id="${koala.id}">READY FOR TRANSFER</button></td>
           </tr>
         `);
+        }
       }
     })
     .catch((err) => {
