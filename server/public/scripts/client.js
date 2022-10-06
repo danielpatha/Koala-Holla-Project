@@ -28,13 +28,15 @@ function setupClickListeners() {
 
   //click listener & function to mark koala READY TO TRANSFER
   $('.body').on('click', '.readyBtn', function(){
+    // koalaID is the id of the koala which was clicked
     const koalaID = $(this).data('id');
     console.log('click to transfer id:', koalaID);
 
     $.ajax({
       method:'PUT',
       url:`/koalas/${koalaID}`
-    })
+    })  
+      //then insert the response as an argument to call getKoalas() and update DOM
       .then(function(res) {
         getKoalas();
       })
