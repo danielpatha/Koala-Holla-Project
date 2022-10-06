@@ -44,12 +44,10 @@ function getKoalas(){
             <td>${koala.gender}</td>
             <td>${koala.ready}</td>
             <td>${koala.notes}</td>
-            <td>
-              <button class="removeBtn" data-id="${koala.id}>REMOVE</button>
-              <button class="readyBtn" data-id="${koala.id}>READY FOR TRANSFER</button>
-            </td>
+            <td><button class="removeBtn" data-id="${koala.id}">REMOVE</button></td>
+            <td><button class="readyBtn" data-id="${koala.id}">READY FOR TRANSFER</button></td>
           </tr>
-        `)
+        `);
       }
     })
     .catch((err) => {
