@@ -22,9 +22,28 @@ function setupClickListeners() {
       readyForTransfer: 'testName',
       notes: 'testName',
     };
+    
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
   }); 
+
+   //Event handler and Anonymous Function for Remove Button
+   $('body').on('click','.removeBtn', function(){
+    console.log('in removeBtn on click');
+     const koalaId = $(this).data('id');//Grabbing data from .removeBtn
+     console.log('click to delete', koalaId);
+  
+     $.ajax({
+      type:"DELETE",
+      url: `/koalas/${koalaId}`,// append koalaID to the URL
+  
+    }).then(function(response){
+      getKoalas();// Call the function getKoalas()
+    }).catch(function(error){
+    console.log('err on delete', error)
+    })
+    });//End of Event Handler and Anonymous Function for Remove Button
+      
 }
 
 function getKoalas(){
@@ -38,3 +57,10 @@ function saveKoala( newKoala ){
   // ajax call to server to get koalas
  
 }
+
+function removeKoala(oldKoala){
+  console.log(' in removeKoala', oldKoala );
+//ajax call to server to get koalas
+
+
+}//end removeKoala
