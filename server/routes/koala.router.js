@@ -20,8 +20,15 @@ koalaRouter.put('/:id', (req, res) => {
     WHERE "id" = $1;`;
 
 pool 
-    .query(queryText)
-})
+    .query(queryText, [req.params.id])
+    .then((res)=> {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        console.log('Error updating ready status', err);
+        res.sendStatus(500);
+    });
+});
 
 
 // DELETE
