@@ -25,6 +25,23 @@ function setupClickListeners() {
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
   }); 
+
+  //click listener & function to mark koala READY TO TRANSFER
+  $('.body').on('click', '.readyBtn', function(){
+    const koalaID = $(this).data('id');
+    console.log('click to transfer id:', koalaID);
+
+    $.ajax({
+      method:'PUT',
+      url:`/koalas/${koalaID}`
+    })
+      .then(function(res) {
+        getKoalas();
+      })
+
+
+  })
+
 }
 
 function getKoalas(){
