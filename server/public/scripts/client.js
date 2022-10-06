@@ -35,6 +35,7 @@ function getKoalas(){
     method: 'GET'
   })
     .then((res) => {
+      $('#viewKoalas').empty();
       for(const koala of res) {
         $('#viewKoalas').append(`
           <tr>
@@ -50,14 +51,10 @@ function getKoalas(){
           </tr>
         `)
       }
-
     })
-  /*
-    <tr>
-      <td> <button class="deleteBtn" data-id="${koala.id}"> </button>
-      <td>
-      
-  */
+    .catch((err) => {
+      console.log('Something went wrong! in getKoalas() GET ajax call', err);
+    })
 } // end getKoalas
 
 function saveKoala( newKoala ){
