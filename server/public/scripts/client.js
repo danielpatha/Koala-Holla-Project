@@ -90,6 +90,7 @@ function getKoalas(){
               <td>${koala.ready}</td>
               <td>${koala.notes}</td>
               <td><button class="removeBtn" data-id="${koala.id}">REMOVE</button></td>
+              <td><button class="readyBtn" data-id="${koala.id}">NOT READY</button></td>
             </tr>
           `);
         }
