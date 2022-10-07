@@ -33,6 +33,19 @@ function setupClickListeners() {
     console.log('in removeBtn on click');
      const koalaId = $(this).data('id');//Grabbing data from .removeBtn
      console.log('click to delete', koalaId);
+     Swal.fire({
+      title: 'Remove Koala Confirmed',
+      type: 'warning',
+      cancelButtonText: 'Some text for cancel button'
+   })
+   
+   .then(function(){
+      // function when confirm button clicked
+   }, function(dismiss){
+      if(dismiss == 'cancel'){
+          // function when cancel button is clicked
+      }
+   });
   
      $.ajax({
       type:"DELETE",
