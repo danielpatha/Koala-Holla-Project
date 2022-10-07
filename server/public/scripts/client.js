@@ -34,7 +34,7 @@ function setupClickListeners() {
      const koalaId = $(this).data('id');//Grabbing data from .removeBtn
      console.log('click to delete', koalaId);
      Swal.fire({
-      title: 'Delete Koala Confirm',
+      title: 'Remove Koala Confirmed',
       type: 'warning',
       cancelButtonText: 'Some text for cancel button'
    })
