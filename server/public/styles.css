@@ -29,3 +29,22 @@ td:nth-child(even) {
 td:nth-child(odd) {
     background-color: azure;
 }
+
+header{
+    background-color: rgb(7, 96, 230);
+    padding: 30px;
+    margin: -10px;
+}
+img {
+    float: left;
+    height: 160px;
+    width: 160px;
+    padding: 10px;
+  }
+
+  *{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  h3,h4{
+    color: rgb(27, 24, 24);
+  }
