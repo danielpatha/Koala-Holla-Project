@@ -31,33 +31,46 @@ function setupClickListeners() {
    //Event handler and Anonymous Function for Remove Button
    $('body').on('click','.removeBtn', function(){
     console.log('in removeBtn on click');
-     const koalaId = $(this).data('id');//Grabbing data from .removeBtn
-     console.log('click to delete', koalaId);
-     Swal.fire({
-      title: 'Remove Koala Confirmed',
-      type: 'warning',
-      cancelButtonText: 'Some text for cancel button'
-   })
-   
-   .then(function(){
-      // function when confirm button clicked
-   }, function(dismiss){
-      if(dismiss == 'cancel'){
-          // function when cancel button is clicked
-      }
-   });
-  
-     $.ajax({
-      type:"DELETE",
-      url: `/koalas/${koalaId}`,// append koalaID to the URL
-  
-    }).then(function(response){
-      getKoalas();// Call the function getKoalas()
-    }).catch(function(error){
-    console.log('err on delete', error)
-    })
-    });//End of Event Handler and Anonymous Function for Remove Button
-      
+    const koalaId = $(this).data('id');//Grabbing data from .removeBtn
+    console.log('click to delete', koalaId);
+    swal.fire({
+      icon: 'warning',
+      title: 'Remove Koala Confirmation',
+      text: 'Are you sure you want to remove?',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+      reverseButtons: true,
+      focusDeny: true
+    })  // swal returns an object 'value' with these properties:
+    /* 
+    const value = {
+      isConfirmed: BOOLEAN;
+      isDenied: BOOLEAN;
+      isDismissed: BOOLEAN;
+      value: BOOLEAN;
+    } 
+    */
+      .then(value => { 
+        console.log(value); // debug code for looking at swal 'promise' return value
+        if(value.isConfirmed) {
+          $.ajax({
+            type:"DELETE",
+            url: `/koalas/${koalaId}`,// append koalaID to the URL
+          })
+          .then(function(response){
+            getKoalas(); // Call the function getKoalas()
+          })
+          .catch(function(error){
+            console.log('err on delete', error)
+          }) 
+          swal.fire('Removal Success', 'Koala has been removed', 'success');
+        }
+        else {
+          swal.fire('Removal Stopped', 'No koala has been removed', 'error');
+        }
+      })
+  }); //End of Event Handler and Anonymous Function for Remove Button
 
   //click listener & function to mark koala READY TO TRANSFER
   $('body').on('click', '.readyBtn', function(){
