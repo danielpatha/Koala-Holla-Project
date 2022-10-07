@@ -1,6 +1,8 @@
 # Koala Holla 
 
 ## Description
+<img src="Koalaphoto.jpeg" alt= "photo source is : http://www.edgeofexistence.org/species/koala/">
+
 
 _Duration: 2 day Group Sprint_
 
