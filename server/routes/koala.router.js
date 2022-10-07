@@ -12,6 +12,7 @@ koalaRouter.get('/', (req, res) => {
 
     pool.query(`
         SELECT * FROM "koalas"
+        ORDER BY "id" ASC;
     `)
         .then((dbRes) => {
             res.send(dbRes.rows);
@@ -60,9 +61,8 @@ koalaRouter.post('/', (req, res) => {
 koalaRouter.put('/:id', (req, res) => {
     console.log( 'in koalaRouter PUT with id of:', req.params.id);
 
-    let queryText = `UPDATE "koalas"
-    SET "ready" = TRUE
-    WHERE "id" = $1;`;
+    let queryText = `UPDATE "koalas" SET "ready" = NOT "ready" 
+                    WHERE "id" = $1;`;
 
     pool 
         .query(queryText, [req.params.id])

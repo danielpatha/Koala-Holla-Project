@@ -87,7 +87,8 @@ function getKoalas(){
               <td>${koala.name}</td>
               <td>${koala.age}</td>
               <td>${koala.gender}</td>
-              <td>${koala.ready}</td>
+              <td>Ready</td>
+              <td><button class="readyBtn" data-id="${koala.id}">CHANGE TO <b>"NOT READY"</b></button></td>
               <td>${koala.notes}</td>
               <td><button class="removeBtn" data-id="${koala.id}">REMOVE</button></td>
             </tr>
@@ -99,10 +100,10 @@ function getKoalas(){
             <td>${koala.name}</td>
             <td>${koala.age}</td>
             <td>${koala.gender}</td>
-            <td>${koala.ready}</td>
+            <td>Not Ready</td>
+            <td><button class="readyBtn" data-id="${koala.id}">CHANGE TO <b>"READY"</b></button></td>
             <td>${koala.notes}</td>
             <td><button class="removeBtn" data-id="${koala.id}">REMOVE</button></td>
-            <td><button class="readyBtn" data-id="${koala.id}">READY FOR TRANSFER</button></td>
           </tr>
         `);
         }
