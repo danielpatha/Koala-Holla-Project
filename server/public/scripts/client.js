@@ -25,8 +25,7 @@ function setupClickListeners() {
     
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
-  }); 
-
+  });
 
    //Event handler and Anonymous Function for Remove Button
    $('body').on('click','.removeBtn', function(){
@@ -90,11 +89,9 @@ function setupClickListeners() {
       .catch((err) => {
         console.log('PUT /koalas error', err)
       })
-
-
   })
 
-
+  $('body').on('click', '.editBtn', editKoala);
 }
 
 function getKoalas(){
@@ -117,6 +114,7 @@ function getKoalas(){
               <td><button class="readyBtn" data-id="${koala.id}">CHANGE TO <b>"NOT READY"</b></button></td>
               <td>${koala.notes}</td>
               <td><button class="removeBtn" data-id="${koala.id}">REMOVE</button></td>
+              <td><button class="editBtn" data-id="${koala.id}">EDIT</button></td>
             </tr>
           `);
         }
@@ -130,6 +128,7 @@ function getKoalas(){
             <td><button class="readyBtn" data-id="${koala.id}">CHANGE TO <b>"READY"</b></button></td>
             <td>${koala.notes}</td>
             <td><button class="removeBtn" data-id="${koala.id}">REMOVE</button></td>
+            <td><button class="editBtn" data-id="${koala.id}">EDIT</button></td>
           </tr>
         `);
         }
@@ -163,3 +162,38 @@ function removeKoala(oldKoala){
 
 
 }//end removeKoala
+
+function editKoala() {
+  swal.fire({
+    icon: 'warning',
+    title: 'Editing Koala Data',
+    text: 'Are you sure you want to edit this koala\'s data?',
+    showDenyButton: true,
+    reverseButtons: true,
+    focusDeny: true,
+  })
+    .then(value => {
+      if(value.isConfirmed) {
+        $.ajax({
+          url: `/koalas/edit/${$(this).data('id')}`,
+          method: 'PUT',
+          data: {
+            name: $('#nameIn').val(),
+            age: $('#ageIn').val(),
+            gender: $('#genderIn').val(),
+            notes: $('#notesIn').val()
+          }
+        })
+          .then(res => {
+            swal.fire('Koala data edited!', 'Stuff has changed!', 'success');
+            getKoalas();
+          })
+          .catch(err => {
+            console.log('/koalas/edit PUT error', err);
+          })
+      }
+      else {
+        swal.fire('Edit process stopped', '', 'warning');
+      }
+    })
+}
