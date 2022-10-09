@@ -77,6 +77,25 @@ koalaRouter.put('/:id', (req, res) => {
 });
 
 
+koalaRouter.put('/edit/:id', (req, res) => {
+    console.log('inside PUT /edit/:id', req.params.id);
+
+    let queryText = `UPDATE "koalas" SET "name" = $1, "age" = $2, "gender" = $3, "notes" = $4 WHERE "id" = $5`;
+
+    let sqlParams = [req.body.name, req.body.age, req.body.gender, req.body.notes, req.params.id];
+
+    pool.query(queryText, sqlParams)
+        .then((result) => {
+            console.log('koala data has been updated!');
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('error editing koala info', err);
+            res.sendStatus(500);
+        });
+})
+
+
 // DELETE
 //The Remove button will remove a Koala from the table
 //This will include an id parameter to see which Koala to delete.
